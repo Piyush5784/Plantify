@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
+
 export default function PlantInfo({ params }: { params: { plantId: number } }) {
   const { plantId } = params;
   const plant = AllItems.find((I) => I.id == Number(plantId));
@@ -88,7 +89,9 @@ export default function PlantInfo({ params }: { params: { plantId: number } }) {
                     variant={"outline"}
                     // onClick={() => router.push("/cart")}
                   >
-                    <Link href="/cart">Go to cart</Link>
+                    <p>
+                      <Link href="/cart">Go to cart</Link>
+                    </p>
                   </Button>
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground">
