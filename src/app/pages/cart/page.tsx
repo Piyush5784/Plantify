@@ -9,6 +9,7 @@ import {
   DecreaseQuantity,
   RemoveFromCart,
 } from "@/store/Slices/CartItemSlice";
+import Image from "next/image";
 
 export default function CartItems() {
   const dispatch = useDispatch();
@@ -64,7 +65,7 @@ export default function CartItems() {
                 key={item.id}
                 className="border p-4 rounded-md shadow-md flex items-center"
               >
-                <img
+                <Image
                   src={item.image}
                   alt={item.title}
                   className="w-24 h-24 object-cover rounded-md mr-4"

@@ -19,10 +19,12 @@ export default function Component() {
         <p className="text-lg sm:text-xl text-white mb-8 max-w-[600px]">
           Immerse yourself in the breathtaking landscapes of our world, from
           towering mountains to serene coastlines.
-        </p>
-        <Button size={"lg"} variant={"default"}>
-          <Link href="/pages/explore">Explore Now</Link>
-        </Button>
+        </p>{" "}
+        <Link href="/pages/explore">
+          <Button size={"lg"} variant={"default"}>
+            Explore Now
+          </Button>
+        </Link>
       </div>
     </section>
   );
