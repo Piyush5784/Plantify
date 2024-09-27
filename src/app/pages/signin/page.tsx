@@ -33,6 +33,7 @@ function onSubmit(values: z.infer<typeof formSchema>) {
 export default function ProfileForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    mode: "onChange",
     defaultValues: {
       email: "",
       password: "",
@@ -130,33 +131,33 @@ export default function ProfileForm() {
                 </div>
               </form>
             </Form>
-            <div className="flex items-center justify-center opacity-10">
+            <div className="flex items-center justify-center ">
               <div className="w-[23%] border h-0"></div>
               <div className="px-2">or continue with</div>
               <div className="w-[22%] border h-0"></div>
             </div>
-            <div className="flex gap-10">
+            <div className="flex gap-10 opactity-10">
               <Button
-                className="mt-3 border border-gray-700 flex w-full items-center justify-center rounded-md  border-input bg-white dark:bg-white px-3 py-2 text-sm font-semibold text-muted-foreground text-black shadow-sm transition-colors hover:bg-muted hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-                onClick={(e) => googleSignInHandler(e)}
+                className=" mt-3 border border-gray-700 flex w-full items-center justify-center rounded-md  border-input bg-white dark:bg-white px-3 py-2 text-sm font-semibold text-muted-foreground text-black shadow-sm transition-colors hover:bg-muted hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                // onClick={(e) => googleSignInHandler(e)}
               >
                 <IconContext.Provider value={{ size: "25" }}>
                   <div className="px-2">
                     <FcGoogle />
                   </div>
                 </IconContext.Provider>
-                Google
+                coming soon
               </Button>
               <Button
                 className="mt-3 border border-gray-700 flex w-full items-center justify-center rounded-md border-input bg-white dark:bg-white px-3 py-2 text-sm font-semibold text-muted-foreground text-black shadow-sm transition-colors hover:bg-muted hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-                onClick={(e) => githubSignInHandler(e)}
+                // onClick={(e) => githubSignInHandler(e)}
               >
                 <IconContext.Provider value={{ size: "25" }}>
                   <div className="px-2">
                     <IoLogoGithub />
                   </div>
                 </IconContext.Provider>
-                Github
+                coming soon
               </Button>
             </div>
           </div>
