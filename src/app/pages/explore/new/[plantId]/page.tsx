@@ -1,43 +1,59 @@
 "use client";
 import { AllItems } from "@/assets/Items";
-import { PlantCard } from "@/components/custom/Explore-page-cart";
+import { PlantCard } from "@/components/custom/Explore-page-plant-card";
 import Navbar from "@/components/custom/Navbar";
 import { Button } from "@/components/ui/button";
+import { RootState } from "@/store";
 import { AddtoCart } from "@/store/Slices/CartItemSlice";
 import { Badge } from "lucide-react";
 import Image from "next/image";
-import { MouseEvent } from "react";
 import { useRouter } from "next/navigation";
+import { MouseEvent } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store";
 
-export default function getServerSideProps({ params }: { params: { plantId: string } }) {
+interface Plant {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  price: number;
+  category: string;
+  rating: number;
+}
+
+interface Props {
+  params: {
+    plantId: string;
+  };
+}
+
+const PlantPage = ({ params }: Props) => {
   const { plantId } = params;
-  const plant = AllItems.find((I) => I.id == Number(plantId));
+  const plant = AllItems.find((I) => I.id === Number(plantId));
   const remaining = AllItems.filter((I) => I.id !== Number(plantId)).slice(
     0,
     5
   );
-  const router = useRouter();
-  const dispatch = useDispatch();
 
-  function handleAddToCart(
-    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
-    id: number
-  ) {
+  if (!plant) {
+    return (
+      <div>Plant not found</div> // Return a 404 message if plant is not found
+    );
+  }
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleAddToCart = (e: MouseEvent<HTMLButtonElement>, id: number) => {
     e.preventDefault();
     dispatch(AddtoCart(id));
     toast.success("Item successfully added");
-  }
+  };
 
   const cartItems = useSelector(
     (state: RootState) => state.cartItems.cartItems
   );
-
-  if (!plant) {
-    return <div>Plant not found</div>;
-  }
 
   return (
     <>
@@ -78,7 +94,10 @@ export default function getServerSideProps({ params }: { params: { plantId: stri
                 <Button size="lg" onClick={(e) => handleAddToCart(e, plant.id)}>
                   Add to Cart
                 </Button>
-                <Button variant="outline" onClick={() => router.push("/pages/cart")}>
+                <Button
+                  variant="outline"
+                  onClick={() => router.push("/pages/cart")}
+                >
                   Go to Cart
                 </Button>
               </div>
@@ -106,7 +125,7 @@ export default function getServerSideProps({ params }: { params: { plantId: stri
       </div>
     </>
   );
-}
+};
 
 function renderStars(rating: number) {
   const totalStars = 5;
@@ -128,7 +147,7 @@ function renderStars(rating: number) {
   );
 }
 
-function StarIcon(props: any) {
+function StarIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -146,3 +165,5 @@ function StarIcon(props: any) {
     </svg>
   );
 }
+
+export default PlantPage;

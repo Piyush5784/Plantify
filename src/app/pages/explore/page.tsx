@@ -1,15 +1,11 @@
 "use client";
-import { AllItems } from "@/assets/Items";
-import ExplorePageCart, {
-  PlantCard,
-} from "@/components/custom/Explore-page-cart";
-import Navbar from "@/components/custom/Navbar";
+import { PlantCard } from "@/components/custom/Explore-page-plant-card";
 import Footer from "@/components/custom/Footer";
-import { useSelector } from "react-redux";
-import { ItemsType } from "@/types/itemsType";
-import { RootState } from "@/store";
+import Navbar from "@/components/custom/Navbar";
 import { Sidebar } from "@/components/custom/Sidebar";
-import Link from "next/link";
+import { RootState } from "@/store";
+import { ItemsType } from "@/types/itemsType";
+import { useSelector } from "react-redux";
 
 export default function Home() {
   const items = useSelector(
