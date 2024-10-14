@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
 
-export default function PlantInfo({ params }: { params: { plantId: string } }) {
+export default function getServerSideProps({ params }: { params: { plantId: string } }) {
   const { plantId } = params;
   const plant = AllItems.find((I) => I.id == Number(plantId));
   const remaining = AllItems.filter((I) => I.id !== Number(plantId)).slice(
@@ -78,7 +78,7 @@ export default function PlantInfo({ params }: { params: { plantId: string } }) {
                 <Button size="lg" onClick={(e) => handleAddToCart(e, plant.id)}>
                   Add to Cart
                 </Button>
-                <Button variant="outline" onClick={() => router.push("/cart")}>
+                <Button variant="outline" onClick={() => router.push("/pages/cart")}>
                   Go to Cart
                 </Button>
               </div>

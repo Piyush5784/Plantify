@@ -54,11 +54,9 @@ const filterSlice = createSlice({
       state.sortedOrder = "ZtoA";
     },
     toggleCategory(state, action: actionType) {
-      const category = action.payload.payload;
+      const category = action.payload.payload as category;
       const filteredItems = AllItems.filter((c) => c.category == category);
-
       state.FilterItems = filteredItems;
-      //@ts-ignore
       state.selectedCategories = category;
       filterSlice.caseReducers.setfilterAtoZ(state);
       filterSlice.caseReducers.setStarFilter(state, {
