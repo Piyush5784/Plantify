@@ -1,17 +1,9 @@
 "use client";
-import { signIn } from "next-auth/react";
-import toast from "react-hot-toast";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { FcGoogle } from "react-icons/fc";
+import Navbar from "@/components/custom/Navbar";
 import { Button } from "@/components/ui/button";
-import { IoLogoGithub } from "react-icons/io";
-import { JSX, MouseEvent, SVGProps } from "react";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -19,8 +11,15 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { formSchema } from "@/schema/zodValidationSchema";
-import Navbar from "@/components/custom/Navbar";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
+import { JSX, MouseEvent, SVGProps, useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { FcGoogle } from "react-icons/fc";
+import { IoLogoGithub } from "react-icons/io";
 import { IconContext } from "react-icons/lib";
+import { z } from "zod";
 
 function onSubmit(values: z.infer<typeof formSchema>) {
   toast.promise(signIn("credentials", values), {
@@ -31,6 +30,7 @@ function onSubmit(values: z.infer<typeof formSchema>) {
 }
 
 export default function ProfileForm() {
+  const [showPassword, setShowPassoword] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: "onChange",
@@ -39,6 +39,13 @@ export default function ProfileForm() {
       password: "",
     },
   });
+
+  function passwordVisiblity(
+    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) {
+    e.preventDefault();
+    setShowPassoword((c) => !c);
+  }
 
   function googleSignInHandler(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
@@ -96,7 +103,7 @@ export default function ProfileForm() {
                         <div className="relative">
                           <Input
                             id="password"
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             placeholder="Enter your password"
                             autoComplete="password"
                             className="block w-full appearance-none rounded-md border border-input bg-background px-3 py-2 placeholder-muted-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary sm:text-sm"
@@ -106,7 +113,7 @@ export default function ProfileForm() {
                             variant="ghost"
                             size="icon"
                             className="absolute top-1/2 right-2 -translate-y-1/2"
-                            // onClick={}
+                            onClick={(e) => passwordVisiblity(e)}
                           >
                             <EyeIcon className="h-5 w-5" />
                             <span className="sr-only">
