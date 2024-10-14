@@ -1,15 +1,15 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store";
-import { MouseEvent, useState } from "react";
 import Navbar from "@/components/custom/Navbar";
+import { RootState } from "@/store";
 import {
   AddtoCart,
   DecreaseQuantity,
   RemoveFromCart,
 } from "@/store/Slices/CartItemSlice";
 import Image from "next/image";
+import { MouseEvent, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function CartItems() {
   const dispatch = useDispatch();
@@ -68,6 +68,8 @@ export default function CartItems() {
                 <Image
                   src={item.image}
                   alt={item.title}
+                  height={200}
+                  width={200}
                   className="w-24 h-24 object-cover rounded-md mr-4"
                 />
                 <div className="flex-1">
